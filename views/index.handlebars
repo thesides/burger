@@ -1,0 +1,48 @@
+<h1>Lets Eat Some Burgers!</h1>
+
+<h2>Uneaten burgers!</h2>
+
+<ul>
+  {{#each burger}}
+    {{#unless devoured}}
+      {{> cats/cat-block sleep=true}}
+    {{/unless}}
+  {{/each}}
+</ul>
+
+<h2>Burgers that have been eaten!</h2>
+
+<ul>
+  {{#each burger}}
+    {{#if sleepy}}
+      {{> cats/cat-block sleep=false}}
+    {{/if}}
+  {{/each}}
+</ul>
+
+<p>{{data}}</p>
+
+<form action="/" method="POST">
+	<textarea type="text" name="newBurger" id="newBurger"></textarea>
+	<button type="submit" id="submit">Submit your new burger</button>
+</form>
+
+<script>
+$(".submit").on("click", function (event){
+	event.preventDefault();
+
+	var newBurger = {
+		burger_name: $(".newBurger").val().trim();
+		devoured: false;
+	};
+
+	$.ajax("/api/burgers", {
+		type: "POST"
+		data: newBurger
+	}).then(function (){
+		console.log(newBurger);
+		location.reload();
+	});
+});
+
+</script>
