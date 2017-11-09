@@ -7,7 +7,7 @@ var burgersController = require("./controllers/burgers_controller.js")
 var burger = require("./models/burger.js")
 
 var app = express();
-var port = process.env.port || 8080;
+var port = process.env.port || 8080 || 3306;
 
 app.use(express.static("public"));
 
