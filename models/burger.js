@@ -1,14 +1,17 @@
 var orm = require("../config/orm.js");
 
 var burger = {
-	selectAll: function (){
-		orm.selectAll(function (res){
-			console.log(res);
+	selectAll: function (callback){
+		orm.selectAll(function (result){
+			console.log(result);
+			callback(result);
 		});
 	},
 
-	createBurger: function (val){
-		orm.createBurger(val);
+	createBurger: function (val, callback){
+		orm.createBurger(val, function (result){
+			callback(result);
+		});
 	},
 
 	eatBurger: function (burgerId){

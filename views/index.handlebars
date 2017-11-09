@@ -4,8 +4,8 @@
 
 <ul>
   {{#each burger}}
-    {{#unless devoured}}
-      {{> cats/cat-block sleep=true}}
+    {{#unless this.devoured}}
+      {{this.burger_name}}
     {{/unless}}
   {{/each}}
 </ul>
@@ -22,27 +22,27 @@
 
 <p>{{data}}</p>
 
-<form action="/" method="POST">
+<form action="/api/burger" method="POST">
 	<textarea type="text" name="newBurger" id="newBurger"></textarea>
 	<button type="submit" id="submit">Submit your new burger</button>
 </form>
 
 <script>
-$(".submit").on("click", function (event){
-	event.preventDefault();
+// $(".submit").on("click", function (event){
+// 	event.preventDefault();
 
-	var newBurger = {
-		burger_name: $(".newBurger").val().trim();
-		devoured: false;
-	};
+// 	var burger_name = $("#newBurger").val().trim();
 
-	$.ajax("/api/burgers", {
-		type: "POST"
-		data: newBurger
-	}).then(function (){
-		console.log(newBurger);
-		location.reload();
-	});
-});
+// 	console.log("YOOO"+burger_name);
+
+
+// 	$.ajax("/api/burger", {
+// 		type: "POST",
+// 		data: burger_name
+// 	}).then(function (data){
+// 		console.log(data);
+// 		location.reload();
+// 	});
+// });
 
 </script>

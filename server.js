@@ -23,10 +23,17 @@ app.set("view engine", "handlebars");
 
 app.get("/", function (req, res){
 	burger.selectAll(function (data){
-		//console.log(data);
-		res.json(data);
+		console.log(data);
+		res.render("index", {burger: data});
 	})
 });
+
+app.post("/api/burger", function (req, res){
+	burger.createBurger(req.body.newBurger, function (data){
+		console.log(data);
+		res.render("index", data);
+	})
+})
 
 
 app.listen(port, function (){
