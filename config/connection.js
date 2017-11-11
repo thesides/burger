@@ -1,12 +1,9 @@
-
-
-
-	var mysql = require("mysql");
+var mysql = require("mysql");
 
 	var connection = mysql.createConnection({
-	  host: "localhost",
-	  user: "root",
-	  password: "",
+	  host: "localhost" || "yhrz9vns005e0734.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
+	  user: "root" || "xg63k7rowsc5gn66",
+	  password: "" || "lxz51vtcnytbtyly",
 	  database: "burgers_db"
 	});
 
