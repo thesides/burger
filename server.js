@@ -29,12 +29,20 @@ app.get("/", function (req, res){
 });
 
 app.post("/api/burger", function (req, res){
-	burger.createBurger(req.body.newBurger, function (data){
-		console.log(data);
-		res.render("index", data);
-	})
-})
+	burger.createBurger(req.body.newBurger, function (result){
+		console.log(result);
+		location.reload();
+	});
+});
 
+app.put("/api/burger", function (req, res){
+	burger.eatBurger(req.body.data, function (result){
+		console.log(result);
+		res.end();
+	});
+});
+
+app.use("/api/burger", burgersController);
 
 app.listen(port, function (){
 	console.log("Listening on port " + port);

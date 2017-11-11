@@ -5,7 +5,14 @@
 <ul>
   {{#each burger}}
     {{#unless this.devoured}}
-      {{this.burger_name}}
+    	<p>{{this.burger_name}}</p>
+
+    	
+
+    	<button class="eat-burger" name = "eatBurger" id="eat" data-id="{{id}}" data-devoured="{{devoured}}">
+			{{#if devoured}}Already Eaten!{{else}}Eat Me{{/if}}
+		</button>
+
     {{/unless}}
   {{/each}}
 </ul>
@@ -14,11 +21,14 @@
 
 <ul>
   {{#each burger}}
-    {{#if sleepy}}
-      {{> cats/cat-block sleep=false}}
+    {{#if this.devoured}}
+      {{this.burger_name}}
+     
     {{/if}}
   {{/each}}
 </ul>
+
+
 
 <p>{{data}}</p>
 
@@ -28,21 +38,40 @@
 </form>
 
 <script>
-// $(".submit").on("click", function (event){
-// 	event.preventDefault();
+$(".submit").on("click", function (event){
+	event.preventDefault();
 
-// 	var burger_name = $("#newBurger").val().trim();
-
-// 	console.log("YOOO"+burger_name);
+	var burger_name = $("#newBurger").val().trim();
 
 
-// 	$.ajax("/api/burger", {
-// 		type: "POST",
-// 		data: burger_name
-// 	}).then(function (data){
-// 		console.log(data);
-// 		location.reload();
-// 	});
-// });
+	$.ajax("/api/burger", {
+		type: "POST",
+		data: burger_name
+	}).then(function (data){
+		console.log(data);
+		location.reload();
+	});
+});
+
+$("#eat").on("click", function (event){
+	event.preventDefault();
+
+	var id = $(this).data("id")
+
+
+	var eatBurger = {
+		id: id
+	}
+
+	$.ajax("/api/burger", {
+		type: "PUT",
+		data: eatBurger
+	}).then(function(data){
+		console.log(data.eatBurger)
+		location.reload();
+	});
+});
+
+
 
 </script>
