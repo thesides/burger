@@ -14,8 +14,10 @@ var burger = {
 		});
 	},
 
-	eatBurger: function (burgerId){
-		orm.eatBurger(burgerId);
+	eatBurger: function (burgerId, callback){
+		orm.eatBurger(burgerId, function (result){
+			callback(result);
+		});
 	}
 };
 

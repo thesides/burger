@@ -31,14 +31,14 @@ app.get("/", function (req, res){
 app.post("/api/burger", function (req, res){
 	burger.createBurger(req.body.newBurger, function (result){
 		console.log(result);
-		location.reload();
+		res.render("index", {burger: result});
 	});
 });
 
-app.put("/api/burger", function (req, res){
-	burger.eatBurger(req.body.data, function (result){
+app.put("api/burger/:id", function (req, res){
+	burger.eatBurger(req.params.id, function (result){
 		console.log(result);
-		res.end();
+		res.json(result);
 	});
 });
 

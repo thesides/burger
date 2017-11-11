@@ -22,9 +22,9 @@ router.post("/api/burger", function (req, res){
 	});
 });
 
-router.put("/api/burger", function (req, res){
-	burger.eatBurger(req.body.eatBurger, function (result){
-		console.log(req.body.eatBurger);
+router.put("/api/burger/:id", function (req, res){
+	burger.eatBurger(req.params.id, function (result){
+		
 		res.end();
 	});
 });
